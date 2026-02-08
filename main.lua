@@ -1,3 +1,4 @@
+local collisions = require("src.helper.collisions")
 local map = require("src.mechanics.map")
 
 tileSize = map.tileSize
@@ -76,7 +77,35 @@ function drawMap()
     end
 end
 
+local function isSolid(tile)
+    return tile ~= 0 and tile ~= -1
+end
+
+function checkTileCollision(entity)
+    for _, layer in ipairs(tiles) do
+        for y, row in ipairs(layer) do
+            for x, tile in ipairs(row) do
+                if isSolid(tile) then
+                    local tileRect = {
+                        x = (x -1) * tileSize,
+                        y = (y -1 ) * tileSize,
+                        w = tileSize,
+                        h = tileSize
+                    }
+
+                    if collisions.checkCollision(entity, tileRect) then
+                        return true, tileRect
+                    end
+                end
+            end
+        end
+    end
+    return false
+end
+
 function love.load()
+    camera = require("lib.camera")
+    camera.scale = 4
     local icon = love.image.newImageData("src/assets/gameicon/icon.png")
     love.window.setTitle("Wave To Glory")
     love.window.setIcon(icon)
@@ -88,21 +117,46 @@ function love.load()
     love.mouse.setCursor(customCursor)
 
     player.load()
+
+    camera:setBounds(map.tiles, map.tileSize)
 end
 
 function love.draw()
-    love.graphics.scale(4, 4)
-
+    camera:attach()
     drawMap()
     drawEnemies()
     drawProjectiles()
     player.draw()
     Bubbles:Draw()
+
+        love.graphics.rectangle(
+        "line",
+        player.collisions.x,
+        player.collisions.y,
+        player.collisions.w,
+        player.collisions.h
+    )
+    camera.detach()
 end
 
 function love.update(dt)
+    camera:follow(player, dt)
     player.update(dt)
     Bubbles:Update(dt)
     updateEnemies(dt, player )
     updateProjectiles(dt)
+
+    player.collisions.x = player.x - player.collisions.w / 2
+    player.collisions.y = player.y - player.collisions.h / 2
+
+
+
+    local oldX = player.x
+    local oldY = player.y
+
+    -- collision correction
+    if checkTileCollision(player.collisions) then
+        player.x = oldX
+        player.y = oldY
+    end
 end
