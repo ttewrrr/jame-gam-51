@@ -1,6 +1,8 @@
 local playerEntity = require("src.entities.player")
 local Mine = require("src.entities.Mine")
 local MagneticMiner = require("src.entities.Mine")
+BubbleSystem = require("src.effects.BubbleSystem")
+Bubbles = BubbleSystem.new()
 
 local player = playerEntity.new(50, 200)
 
@@ -38,9 +40,11 @@ function love.draw()
 
     player.draw()
     drawEnemies()
+    Bubbles:Draw()
 end
 
 function love.update(dt)
     player.update(dt)
     updateEnemies(dt)
+    Bubbles:Update(dt)
 end
