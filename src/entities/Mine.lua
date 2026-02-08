@@ -6,7 +6,7 @@ Mine.__index = Mine
 local sprite = love.graphics.newImage("src/assets/Mine.png")
 
 function Mine.new(x, y)
-    local self = Enemy.new(x, y)
+    local self = Enemy.new(x, y, {spriteType = "single"})
     setmetatable(self, Mine)
 
     self.sprite = sprite

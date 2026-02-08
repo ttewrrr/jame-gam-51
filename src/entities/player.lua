@@ -43,7 +43,7 @@ function player.new(x, y)
     end
 
     function self.draw()
-        love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
+        --love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
         love.graphics.draw(playerSprite, playerSprites[self.sprite], self.x, self.y + self.floatOffset, self.rot, 1, 1, 32, 32)
     end
 
@@ -82,12 +82,10 @@ function player.new(x, y)
         if self.idle then
             self.floatTime = self.floatTime + dt
             self.floatOffset = math.sin(self.floatTime * 2) * 4
-            --self.rot = math.sin(self.floatTime * 2) * math.rad(1.5)
             self.rot = angleToMouse
         else
             self.floatTime = 0
             self.floatOffset = (self.floatOffset or 0) * (1 - dt * 5)
-            --self.rot = (self.rot or 0) * (1 - dt * 5)
             self.rot = angleToMouse
 			
 			if love.math.random() < 0.1 then

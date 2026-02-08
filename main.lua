@@ -19,7 +19,7 @@ end
 
 local playerEntity = require("src.entities.player")
 local Mine = require("src.entities.Mine")
-local MagneticMiner = require("src.entities.Mine")
+local Harpooner = require("src.entities.Harpooner")
 BubbleSystem = require("src.effects.BubbleSystem")
 Bubbles = BubbleSystem.new()
 
@@ -29,12 +29,12 @@ enemies = {}
 projectiles = {}
 
 table.insert(enemies, Mine.new(100, 50))
-table.insert(enemies, MagneticMiner.new(100, 50))
+table.insert(enemies, Harpooner.new(100, 50))
 
-function updateEnemies(dt)
+function updateEnemies(dt, player)
     for i = #enemies, 1, -1 do
         local enemy = enemies[i]
-        enemy:update(dt)
+        enemy:update(dt, player)
         if enemy.dead then
             table.remove(enemies, i)
         end
@@ -66,17 +66,23 @@ end
 function drawMap()
     for y, row in ipairs(tiles) do
         for x, tile in ipairs(row) do
-            if tile ~= 0 then
-                love.graphics.draw(tileset, mapQuads[tile], (x-1)* tileSize, (y-1)*tileSize)
+            if tile ~= 0 and tile ~= -1 then
+                love.graphics.draw(tileset, mapQuads[tile +1], (x-1)* tileSize, (y-1)*tileSize)
             end
         end
     end
 end
 
 function love.load()
-    love.window.setTitle("Game")
-    love.window.setMode(1920, 1080, {resizable = true, minwidth = 1280, minheight = 720})
+    local icon = love.image.newImageData("src/assets/gameicon/icon.png")
+    love.window.setTitle("Wave To Glory")
+    love.window.setIcon(icon)
+    love.window.setMode(1920, 1080, {resizable = false, minwidth = 1280, minheight = 720})
     love.graphics.setBackgroundColor(0.1, 0.2, 0.5)
+
+    local cursor = love.image.newImageData("src/assets/UIElements/TheGunCursor.png")
+    customCursor = love.mouse.newCursor(cursor, 0, 0)
+    love.mouse.setCursor(customCursor)
 
     player.load()
 end
@@ -84,16 +90,16 @@ end
 function love.draw()
     love.graphics.scale(4, 4)
 
-    player.draw()
-    Bubbles:Draw()
     drawMap()
     drawEnemies()
     drawProjectiles()
+    player.draw()
+    Bubbles:Draw()
 end
 
 function love.update(dt)
     player.update(dt)
     Bubbles:Update(dt)
-    updateEnemies(dt)
+    updateEnemies(dt, player )
     updateProjectiles(dt)
 end

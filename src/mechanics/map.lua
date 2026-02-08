@@ -1,14 +1,22 @@
--- Load map from JSON file
-local json = require("lib/dkjson") -- Make sure you have a JSON module like rxi/json.lua
-local mapDataRaw = love.filesystem.read("src/maps/map.json")
-local mapData = json.decode(mapDataRaw)
+local function loadCSVMap(filename)
+    local data = love.filesystem.read(filename)
 
--- Extract tiles and tile size
-local tileSize = mapData.tileSize or 16
-local tiles = mapData.tiles or {}
+    local map = {}
 
--- Return as a table
+    for line in data:gmatch("[^\r\n]+") do
+        local row = {}
+        for value in line:gmatch("([^,]+)") do
+            table.insert(row, tonumber(value) or -1)
+        end
+        table.insert(map, row)
+    end
+
+    return map
+end
+
+local tiles = loadCSVMap("src/maps/map1.csv")
+
 return {
-    tileSize = tileSize,
+    tileSize = 16,
     tiles = tiles
 }
