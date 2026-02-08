@@ -16,6 +16,8 @@ function player.new(x, y)
     self.direction = 1
     self.idle = true
 
+    self.collisions = {x = self.x, y = self.y, w = 32, h = 32, vx = 0, vy = 0}
+
     self.sprite = 1
 	
     self.floatTime = 0
