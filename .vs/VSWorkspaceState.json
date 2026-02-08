@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\effects",
+    "\\src\\entities",
     "\\src\\helper",
-    "\\src\\mechanics"
+    "\\src\\mechanics",
+    "\\src\\sounds",
+    "\\src\\sounds\\real"
   ],
+  "SelectedNode": "\\src\\sounds\\real\\RegularEnemyDeath.wav",
   "PreviewInSolutionExplorer": false
 }

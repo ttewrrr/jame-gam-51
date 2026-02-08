@@ -6,6 +6,8 @@ local HealthBarEmptyTexture = nil
 local HealthBarWidth = 0
 local HealthBarHeight = 0
 
+local SoundCache = {}
+
 
 local function LoadHealthBarTexturesIfNeeded()
     if HealthBarFillTexture then return end
@@ -18,6 +20,22 @@ local function LoadHealthBarTexturesIfNeeded()
 
     HealthBarWidth = HealthBarFillTexture:getWidth()
     HealthBarHeight = HealthBarFillTexture:getHeight()
+end
+
+
+local function GetSound(Path)
+    if not Path then return nil end
+    if SoundCache[Path] then return SoundCache[Path] end
+    SoundCache[Path] = love.audio.newSource(Path, "static")
+    return SoundCache[Path]
+end
+
+
+local function PlaySoundWithRandomPitch(SourceObj)
+    if not SourceObj then return end
+    local s = SourceObj:clone()
+    s:setPitch(0.93 + love.math.random() * 0.14)
+    s:play()
 end
 
 
@@ -42,9 +60,22 @@ function HealthComponent.new(Owner, MaxHealth, DamageBubbleTypeId)
     self.PlayerUIX = 16
     self.PlayerUIY = 16
 
+    self.HurtSoundPath = nil
+    self.DeathSoundPath = nil
+    self.HurtSound = nil
+    self.DeathSound = nil
+
     LoadHealthBarTexturesIfNeeded()
 
     return self
+end
+
+
+function HealthComponent:SetSounds(HurtSoundPath, DeathSoundPath)
+    self.HurtSoundPath = HurtSoundPath
+    self.DeathSoundPath = DeathSoundPath
+    self.HurtSound = GetSound(self.HurtSoundPath)
+    self.DeathSound = GetSound(self.DeathSoundPath)
 end
 
 
@@ -54,27 +85,19 @@ function HealthComponent:EventAnyDamage(DMG, DamagedByObject, ImpactX, ImpactY)
     DMG = DMG or 0
     self.Health = self.Health - DMG
 
+    PlaySoundWithRandomPitch(self.HurtSound)
+
     if ImpactX and ImpactY then
-        Bubbles:SpawnBubbles(
-            ImpactX,
-            ImpactY,
-            4, 4,
-            10,
-            self.DamageBubbleTypeId
-        )
+        Bubbles:SpawnBubbles(ImpactX, ImpactY, 4, 4, 10, self.DamageBubbleTypeId)
     end
 
     if self.Health <= 0 then
         self.dead = true
 
+        PlaySoundWithRandomPitch(self.DeathSound)
+
         if self.Owner then
-            Bubbles:SpawnBubbles(
-                self.Owner.x,
-                self.Owner.y,
-                18, 18,
-                60,
-                self.DamageBubbleTypeId
-            )
+            Bubbles:SpawnBubbles(self.Owner.x, self.Owner.y, 18, 18, 60, self.DamageBubbleTypeId)
         end
     end
 end
@@ -86,10 +109,7 @@ function HealthComponent:Draw()
     if not self.Owner then return end
 
     local alpha = 1
-    if self.MaxHealth > 0 then
-        alpha = self.Health / self.MaxHealth
-    end
-
+    if self.MaxHealth > 0 then alpha = self.Health / self.MaxHealth end
     if alpha < 0 then alpha = 0 end
     if alpha > 1 then alpha = 1 end
 
@@ -101,35 +121,16 @@ function HealthComponent:Draw()
         local y = self.PlayerUIY
 
         love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(
-            HealthBarEmptyTexture,
-            x, y,
-            0,
-            self.HealthBarScale,
-            self.HealthBarScale
-        )
+        love.graphics.draw(HealthBarEmptyTexture, x, y, 0, self.HealthBarScale, self.HealthBarScale)
 
         local w = math.floor(HealthBarWidth * alpha)
         if w > 0 then
-            local quad = love.graphics.newQuad(
-                0, 0,
-                w, HealthBarHeight,
-                HealthBarFillTexture:getDimensions()
-            )
-
-            love.graphics.draw(
-                HealthBarFillTexture,
-                quad,
-                x, y,
-                0,
-                self.HealthBarScale,
-                self.HealthBarScale
-            )
+            local quad = love.graphics.newQuad(0, 0, w, HealthBarHeight, HealthBarFillTexture:getDimensions())
+            love.graphics.draw(HealthBarFillTexture, quad, x, y, 0, self.HealthBarScale, self.HealthBarScale)
         end
 
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.pop()
-
         return
     end
 
@@ -137,30 +138,12 @@ function HealthComponent:Draw()
     local y = self.Owner.y - self.HealthBarOffsetY
 
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(
-        HealthBarEmptyTexture,
-        x, y,
-        0,
-        self.HealthBarScale,
-        self.HealthBarScale
-    )
+    love.graphics.draw(HealthBarEmptyTexture, x, y, 0, self.HealthBarScale, self.HealthBarScale)
 
     local w = math.floor(HealthBarWidth * alpha)
     if w > 0 then
-        local quad = love.graphics.newQuad(
-            0, 0,
-            w, HealthBarHeight,
-            HealthBarFillTexture:getDimensions()
-        )
-
-        love.graphics.draw(
-            HealthBarFillTexture,
-            quad,
-            x, y,
-            0,
-            self.HealthBarScale,
-            self.HealthBarScale
-        )
+        local quad = love.graphics.newQuad(0, 0, w, HealthBarHeight, HealthBarFillTexture:getDimensions())
+        love.graphics.draw(HealthBarFillTexture, quad, x, y, 0, self.HealthBarScale, self.HealthBarScale)
     end
 
     love.graphics.setColor(1, 1, 1, 1)

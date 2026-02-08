@@ -5,6 +5,7 @@ local player = {}
 
 local playerSprites = {}
 shootSound = love.audio.newSource("src/sounds/real/PlayerFireGun.wav", "static")
+shootSoundSonar = love.audio.newSource("src/sounds/real/PlayerFireSonarBlast.wav", "static")
 
 function player.new(x, y)
     local self = setmetatable({}, player)
@@ -19,24 +20,68 @@ function player.new(x, y)
 	
     self.floatTime = 0
     self.floatOffset = 0
+
     self.shootTimer = 0
     self.shootCooldown = 0.4
-	
-	self.HealthComponent = HealthComponent.new(self, 100, 2) --max hp, damage par, 2 is blood 3 is sparks for mines or other stuff	
+
+    self.shootSpriteTimer = 0
+    self.shootSpriteDuration = 0.08
+
+    self.sonarTimer = 0
+    self.sonarCooldown = 10.0
+
+    self.SonarSequenceActive = false
+    self.SonarSpriteStartId = 4
+    self.SonarSpriteEndId = 7
+    self.SonarFrameDelay = 0.1
+    self.SonarFrameTimer = 0
+
+	self.HealthComponent = HealthComponent.new(self, 100, 2)
     self.HealthComponent.IsPlayer = true
     self.HealthComponent.DrawHealthBar = true
     self.HealthComponent.HealthBarScale = 2
-	
-		--To Apply Damage to stuff from enemy projectile
-	--player.HealthComponent:EventAnyDamage(25,projectile self,projectile.x,projectile.y)
 
     function self.shoot()
-        table.insert(projectiles, projectile.new(self.x, self.y, self.rot))
-        self.sprite = 2
-        self.sprite = 1
+        table.insert(projectiles, projectile.new(self.x, self.y, self.rot, self, 1))
+
+        if not self.SonarSequenceActive then
+            self.sprite = 2
+            self.shootSpriteTimer = self.shootSpriteDuration
+        end
+
         local s = shootSound:clone()
         s:play()
+
 		Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 5, 1)
+    end
+
+    function self.startSonarSequence()
+        self.SonarSequenceActive = true
+        self.SonarFrameTimer = self.SonarFrameDelay
+        self.sprite = self.SonarSpriteStartId
+
+        local s = shootSoundSonar:clone()
+        s:play()
+    end
+
+    function self.updateSonarSequence(dt)
+        if not self.SonarSequenceActive then return end
+
+        self.SonarFrameTimer = self.SonarFrameTimer - dt
+        if self.SonarFrameTimer > 0 then return end
+
+        self.SonarFrameTimer = self.SonarFrameDelay
+
+        if self.sprite < self.SonarSpriteEndId then
+            self.sprite = self.sprite + 1
+            return
+        end
+
+        table.insert(projectiles, projectile.new(self.x, self.y, self.rot, self, 10))
+        Bubbles:SpawnBubbles(self.x, self.y, 10, 10, 10, 1)
+
+        self.SonarSequenceActive = false
+        self.sprite = 1
     end
 
     function self.load()
@@ -49,24 +94,22 @@ function player.new(x, y)
     end
 
     function self.draw()
-        
         if self.HealthComponent.dead then
-	    return
+	        return
 	    end
+
         self.HealthComponent:Draw()
-        --love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
+
         love.graphics.draw(playerSprite, playerSprites[self.sprite], self.x, self.y + self.floatOffset, self.rot, 1, 1, 32, 32)
     end
 
     function self.update(dt)
-	
 		if self.HealthComponent.dead then
-		return
+		    return
 		end
 
-	
 		if love.keyboard.isDown("o") then
-		self.HealthComponent:EventAnyDamage(1, nil, self.x, self.y)
+		    self.HealthComponent:EventAnyDamage(1, nil, self.x, self.y)
 		end
 	
         if love.keyboard.isDown("right") then
@@ -87,9 +130,15 @@ function player.new(x, y)
             self.y = self.y + 100 * dt
             self.idle = false
         end
+
         if love.mouse.isDown(1) and self.shootTimer <= 0 then
             self.shoot()
             self.shootTimer = self.shootCooldown
+        end
+
+        if love.mouse.isDown(2) and self.sonarTimer <= 0 and not self.SonarSequenceActive then
+            self.startSonarSequence()
+            self.sonarTimer = self.sonarCooldown
         end
 
         function love.keyreleased(key)
@@ -98,7 +147,7 @@ function player.new(x, y)
             end
         end
 
-        local angleToMouse = math.atan2(love.mouse.getY()/ 4 - self.y, love.mouse.getX() / 4 - self.x)
+        local angleToMouse = math.atan2(love.mouse.getY() / 4 - self.y, love.mouse.getX() / 4 - self.x)
 
         if self.idle then
             self.floatTime = self.floatTime + dt
@@ -109,14 +158,28 @@ function player.new(x, y)
             self.floatOffset = (self.floatOffset or 0) * (1 - dt * 5)
             self.rot = angleToMouse
 			
-			if love.math.random() < 0.1 then
+			if love.math.random() < 0.03 then
 				Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 1, 1)
 			end
-			
+        end
+
+        self.updateSonarSequence(dt)
+
+        if not self.SonarSequenceActive then
+            if self.shootSpriteTimer > 0 then
+                self.shootSpriteTimer = self.shootSpriteTimer - dt
+                if self.shootSpriteTimer <= 0 then
+                    self.sprite = 1
+                end
+            end
         end
 
         if self.shootTimer > 0 then
             self.shootTimer = self.shootTimer - dt
+        end
+
+        if self.sonarTimer > 0 then
+            self.sonarTimer = self.sonarTimer - dt
         end
     end
 
