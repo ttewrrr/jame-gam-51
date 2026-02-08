@@ -15,8 +15,8 @@ local EnemyVisualById = {
 -- BEHAVIOR TUNING PER ID
 -- =========================
 local EnemyTuningById = {
-    [0] = {ChaseRange = 320, IdleRange = 200, MoveSpeed = 20, ShootCooldown = 2.0, ProjectileId = 5,  MoveBubbleChance = 0.03,  MoveBubbleAmount = 1},
-    [1] = {ChaseRange = 360, IdleRange = 260, MoveSpeed = 18, ShootCooldown = 0.2, ProjectileId = 1,  MoveBubbleChance = 0.015, MoveBubbleAmount = 1},
+    [0] = {ChaseRange = 320, IdleRange = 200, MoveSpeed = 30, ShootCooldown = 2.0, ProjectileId = 5,  MoveBubbleChance = 0.03,  MoveBubbleAmount = 1},
+    [1] = {ChaseRange = 360, IdleRange = 260, MoveSpeed = 35, ShootCooldown = 0.6, ProjectileId = 1,  MoveBubbleChance = 0.015, MoveBubbleAmount = 1},
     [2] = {ChaseRange = 200, IdleRange = 300, MoveSpeed = 14, ShootCooldown = 6.0, ProjectileId = 10, MoveBubbleChance = 0.01,  MoveBubbleAmount = 2}
 }
 
