@@ -5,7 +5,6 @@ camera.y = 0
 camera.scale = 1
 camera.smoothness = 10
 
--- map boundaries (in pixels)
 camera.bounds = {
     xMin = 0,
     yMin = 0,
@@ -13,7 +12,6 @@ camera.bounds = {
     yMax = 0
 }
 
--- Set boundaries based on all layers
 function camera:setBounds(layers, tileSize)
     local maxWidth = 0
     local maxHeight = 0
@@ -38,11 +36,9 @@ function camera:setPosition(x, y)
 end
 
 function camera:follow(target, dt)
-    -- target must have x, y (center)
     self.x = self.x + (target.x - self.x) * self.smoothness * dt
     self.y = self.y + (target.y - self.y) * self.smoothness * dt
 
-    -- apply bounds
     local screenW = love.graphics.getWidth() / self.scale
     local screenH = love.graphics.getHeight() / self.scale
 
@@ -74,6 +70,12 @@ end
 
 function camera:detach()
     love.graphics.pop()
+end
+
+function camera:screenToWorld(screenX, screenY)
+    local worldX = self.x + (screenX / self.scale) - (love.graphics.getWidth() / (2 * self.scale))
+    local worldY = self.y + (screenY / self.scale) - (love.graphics.getHeight() / (2 * self.scale))
+    return worldX, worldY
 end
 
 return camera

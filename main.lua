@@ -24,7 +24,7 @@ local Harpooner = require("src.entities.Harpooner")
 BubbleSystem = require("src.effects.BubbleSystem")
 Bubbles = BubbleSystem.new()
 
-local player = playerEntity.new(50, 200)
+local player = playerEntity.new(300, 100)
 
 enemies = {}
 projectiles = {}
@@ -140,6 +140,9 @@ function love.draw()
 end
 
 function love.update(dt)
+    local oldX = player.x
+    local oldY = player.y
+
     camera:follow(player, dt)
     player.update(dt)
     Bubbles:Update(dt)
@@ -148,15 +151,22 @@ function love.update(dt)
 
     player.collisions.x = player.x - player.collisions.w / 2
     player.collisions.y = player.y - player.collisions.h / 2
-
-
+    local wasColliding = checkTileCollision(player.collisions)
 
     local oldX = player.x
     local oldY = player.y
 
-    -- collision correction
-    if checkTileCollision(player.collisions) then
+    player.update(dt)
+
+    player.collisions.x = player.x - player.collisions.w / 2
+    player.collisions.y = player.y - player.collisions.h / 2
+    local isColliding = checkTileCollision(player.collisions)
+
+    if isColliding and not wasColliding then
         player.x = oldX
         player.y = oldY
+        player.collisions.x = player.x - player.collisions.w / 2
+        player.collisions.y = player.y - player.collisions.h / 2
     end
 end
+

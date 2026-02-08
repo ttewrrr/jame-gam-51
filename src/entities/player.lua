@@ -15,8 +15,9 @@ function player.new(x, y)
     self.rot = 0
     self.direction = 1
     self.idle = true
-
-    self.collisions = {x = self.x, y = self.y, w = 32, h = 32, vx = 0, vy = 0}
+    self.collisions = {w = 20, h = 20}
+    self.collisions.x = self.x - self.collisions.w / 2
+    self.collisions.y = self.y - self.collisions.h / 2
 
     self.sprite = 1
 	
@@ -149,7 +150,19 @@ function player.new(x, y)
             end
         end
 
-        local angleToMouse = math.atan2(love.mouse.getY() / 4 - self.y, love.mouse.getX() / 4 - self.x)
+        local mouseWorldX = camera.x + (love.mouse.getX() / camera.scale) - (love.graphics.getWidth() / (2 * camera.scale))
+        local mouseWorldY = camera.y + (love.mouse.getY() / camera.scale) - (love.graphics.getHeight() / (2 * camera.scale))
+        
+        local angleToMouse = math.atan2(mouseWorldY - self.y, mouseWorldX - self.x)
+        if angleToMouse > math.pi / 2 or angleToMouse < -math.pi / 2 then
+            self.flipX = -1
+            self.rot = math.pi - angleToMouse
+        else
+            self.flipX = 1
+            self.rot = angleToMouse
+        end
+
+
 
         if self.idle then
             self.floatTime = self.floatTime + dt
