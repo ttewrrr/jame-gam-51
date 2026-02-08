@@ -1,15 +1,14 @@
-local mapData = love.filesystem.read("src/maps/map.json")
+-- Load map from JSON file
+local json = require("lib/dkjson") -- Make sure you have a JSON module like rxi/json.lua
+local mapDataRaw = love.filesystem.read("src/maps/map.json")
+local mapData = json.decode(mapDataRaw)
 
+-- Extract tiles and tile size
+local tileSize = mapData.tileSize or 16
+local tiles = mapData.tiles or {}
+
+-- Return as a table
 return {
-    tileSize = 16,
-
-    tiles = {
-    {1,1,1,1,1,1,1,1,1,1, 1, 1, 1, 1, 1, 28},
-    {1,0,0,0,0,0,0,0,0,1, 0, 0, 0, 0, 0, 14},
-    {1,0,0,1,1,1,0,0,0,1},
-    {1,0,0,0,0,1,0,0,0,1},
-    {1,0,0,0,0,1,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,1,1,1,1,1},
-    }
+    tileSize = tileSize,
+    tiles = tiles
 }

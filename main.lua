@@ -85,15 +85,15 @@ function love.draw()
     love.graphics.scale(4, 4)
 
     player.draw()
+    Bubbles:Draw()
     drawMap()
     drawEnemies()
     drawProjectiles()
-    Bubbles:Draw()
 end
 
 function love.update(dt)
     player.update(dt)
+    Bubbles:Update(dt)
     updateEnemies(dt)
     updateProjectiles(dt)
-    Bubbles:Update(dt)
 end
