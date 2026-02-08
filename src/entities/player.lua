@@ -70,6 +70,7 @@ function player.new(x, y)
 
         if not self.idle then
             --self.rot = math.rad(self.vy * 0.5)
+            Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 1)
         end
     end
 
