@@ -1,7 +1,8 @@
 local projectile = require("src.entities.projectile")
 local Enemy = require("src.helper.enemy")
 
-local shootSound = love.audio.newSource("src/sounds/real/PlayerFireGun.wav", "static")
+local harpoon = love.graphics.newImage("src/assets/Harpooner/HarpoonerHarpoon.png")
+local shootSound = love.audio.newSource("src/sounds/real/EnemyFireGun.wav", "static")
 
 local Harpooner = setmetatable({}, Enemy)
 Harpooner.__index = Harpooner
@@ -30,6 +31,9 @@ function Harpooner:update(dt, player)
     local dy = player.y - self.y
     local dist = math.sqrt(dx*dx + dy*dy)
 
+    self.flipX = dx < 0
+    self.flipY = dy < 0
+
     if dist <= 120 then
         self.state = "chase"
     elseif dist <= 200 then
@@ -55,12 +59,13 @@ function Harpooner:update(dt, player)
             end
 
             local angle = math.atan2(dy, dx)
+            -- self.rot = angle
             self.x = self.x + math.cos(angle) * self.speed * dt
             self.y = self.y + math.sin(angle) * self.speed * dt
 
             self.shootTimer = self.shootTimer + dt
             if self.shootTimer >= self.shootCooldown then
-                table.insert(projectiles, projectile.new(self.x, self.y, 0, -400))
+                table.insert(projectiles, projectile.new(self.x, self.y, angle, harpoon))
                 self.shootTimer = 0
                 local s = shootSound:clone()
                 s:play()

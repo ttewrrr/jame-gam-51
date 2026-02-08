@@ -65,10 +65,12 @@ function drawProjectiles()
 end
 
 function drawMap()
-    for y, row in ipairs(tiles) do
-        for x, tile in ipairs(row) do
-            if tile ~= 0 and tile ~= -1 then
-                love.graphics.draw(tileset, mapQuads[tile +1], (x-1)* tileSize, (y-1)*tileSize)
+    for _, layer in ipairs(tiles) do
+        for y, row in ipairs(layer) do
+            for x, tile in ipairs(row) do
+                if tile ~= 0 and tile ~= -1 then
+                    love.graphics.draw(tileset, mapQuads[tile +1], (x-1)* tileSize, (y-1)*tileSize)
+                end
             end
         end
     end

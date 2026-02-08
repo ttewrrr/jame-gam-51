@@ -4,7 +4,6 @@ local HealthComponent = require("src.mechanics.HealthComponent")
 local player = {}
 
 local playerSprites = {}
-
 shootSound = love.audio.newSource("src/sounds/real/PlayerFireGun.wav", "static")
 
 function player.new(x, y)
@@ -32,7 +31,7 @@ function player.new(x, y)
 	--player.HealthComponent:EventAnyDamage(25,projectile self,projectile.x,projectile.y)
 
     function self.shoot()
-        table.insert(projectiles, projectile.new(self.x, self.y, self.rot, -400))
+        table.insert(projectiles, projectile.new(self.x, self.y, self.rot))
         self.sprite = 2
         self.sprite = 1
         local s = shootSound:clone()
@@ -55,7 +54,7 @@ function player.new(x, y)
 	    return
 	    end
         self.HealthComponent:Draw()
-        love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
+        --love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
         love.graphics.draw(playerSprite, playerSprites[self.sprite], self.x, self.y + self.floatOffset, self.rot, 1, 1, 32, 32)
     end
 

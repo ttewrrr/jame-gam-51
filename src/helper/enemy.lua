@@ -13,8 +13,13 @@ function Enemy.new(x, y, sprite, options)
     self.floatTime = 0
     self.floatOffset = 0
 
+    self.rot = 0
+
     self.shootTimer = 0
-    self.shootCooldown = 0.4
+    self.shootCooldown = 0.8
+
+    self.flipX = false
+    self.flipY = false
 
     self.spriteType = options and options.spriteType or "single"
     self.sprite = sprite
@@ -34,9 +39,9 @@ function Enemy:draw()
     if self.sprite then
         self.sprite:setFilter("nearest", "nearest")
         if self.spriteType == "single" then
-            love.graphics.draw(self.sprite, self.x, self.y + self.floatOffset, 0, 1, 1, self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
+            love.graphics.draw(self.sprite, self.x, self.y + self.floatOffset, self.rot, 1, 1, self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
         elseif self.spriteType == "sheet" and self.quads then
-            love.graphics.draw(self.sprite, self.quads[self.currentQuad], self.x, self.y + self.floatOffset, 0, 1, 1, 32, 32)
+            love.graphics.draw(self.sprite, self.quads[self.currentQuad], self.x, self.y + self.floatOffset, self.rot, self.flipX and -1 or 1, 1, 32, 32)
         end
     end
 end

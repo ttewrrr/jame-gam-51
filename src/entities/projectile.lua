@@ -1,6 +1,6 @@
 local projectile = {}
 
-function projectile.new(entityX, entityY, entityRot)
+function projectile.new(entityX, entityY, entityRot, sprite)
     local self = {}
 
     self.x = entityX
@@ -60,7 +60,11 @@ function projectile.new(entityX, entityY, entityRot)
     end
 
     function self:draw()
-        love.graphics.circle("fill", self.x, self.y, 1)
+        if sprite then
+            love.graphics.draw(sprite, self.x , self.y -25, entityRot)
+        else
+            love.graphics.circle("fill", self.x, self.y, entityRot)
+        end
     end
 
     return self

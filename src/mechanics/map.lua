@@ -14,7 +14,14 @@ local function loadCSVMap(filename)
     return map
 end
 
-local tiles = loadCSVMap("src/maps/map1.csv")
+local groundTiles = loadCSVMap("src/maps/MapCSV/Map_Ground.csv")
+ 
+local backgroundTiles = loadCSVMap("src/maps/MapCSV/Map_Backround.csv")
+
+local tiles = {
+    backgroundTiles,
+    groundTiles
+}
 
 return {
     tileSize = 16,
