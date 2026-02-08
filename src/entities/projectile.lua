@@ -20,6 +20,10 @@ function projectile.new(entityX, entityY, entityRot)
     function self:update(dt)
         self.x = self.x + self.vx * dt
         self.y = self.y + self.vy * dt
+		
+		if love.math.random() < 0.2 then
+			Bubbles:SpawnBubbles(self.x, self.y, 1, 1, 1)
+		end
     end
 
     return self

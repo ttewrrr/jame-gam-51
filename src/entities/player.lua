@@ -30,6 +30,7 @@ function player.new(x, y)
         self.sprite = 1
         local s = shootSound:clone()
         s:play()
+		Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 5)
     end
 
     function self.load()
@@ -88,6 +89,11 @@ function player.new(x, y)
             self.floatOffset = (self.floatOffset or 0) * (1 - dt * 5)
             --self.rot = (self.rot or 0) * (1 - dt * 5)
             self.rot = angleToMouse
+			
+			if love.math.random() < 0.1 then
+				Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 1)
+			end
+			
         end
 
         if self.shootTimer > 0 then
