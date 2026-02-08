@@ -19,8 +19,14 @@ end
 
 local playerEntity = require("src.entities.player")
 local Mine = require("src.entities.Mine")
+<<<<<<< HEAD
 local MagneticMiner = require("src.entities.MagneticMiner")
 local projectile = require("src.entities.projectile")
+=======
+local MagneticMiner = require("src.entities.Mine")
+BubbleSystem = require("src.effects.BubbleSystem")
+Bubbles = BubbleSystem.new()
+>>>>>>> 4ba03988a78a34c7cedc897a9795482eb5ed9a0b
 
 local player = playerEntity.new(50, 200)
 
@@ -86,11 +92,20 @@ function love.draw()
     player.draw()
     drawMap()
     drawEnemies()
+<<<<<<< HEAD
     drawProjectiles()
+=======
+    Bubbles:Draw()
+>>>>>>> 4ba03988a78a34c7cedc897a9795482eb5ed9a0b
 end
 
 function love.update(dt)
     player.update(dt)
     updateEnemies(dt)
+<<<<<<< HEAD
     updateProjectiles(dt)
 end
+=======
+    Bubbles:Update(dt)
+end
+>>>>>>> 4ba03988a78a34c7cedc897a9795482eb5ed9a0b
