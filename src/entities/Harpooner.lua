@@ -1,6 +1,8 @@
 local projectile = require("src.entities.projectile")
 local Enemy = require("src.helper.enemy")
 
+local shootSound = love.audio.newSource("src/sounds/real/PlayerFireGun.wav", "static")
+
 local Harpooner = setmetatable({}, Enemy)
 Harpooner.__index = Harpooner
 
@@ -60,6 +62,8 @@ function Harpooner:update(dt, player)
             if self.shootTimer >= self.shootCooldown then
                 table.insert(projectiles, projectile.new(self.x, self.y, 0, -400))
                 self.shootTimer = 0
+                local s = shootSound:clone()
+                s:play()
             end
         end
 end

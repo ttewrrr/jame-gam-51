@@ -10,8 +10,8 @@ local HealthBarHeight = 0
 local function LoadHealthBarTexturesIfNeeded()
     if HealthBarFillTexture then return end
 
-    HealthBarFillTexture = love.graphics.newImage("src/assets/UI Elements/HealthBar/HealthBar.png")
-    HealthBarEmptyTexture = love.graphics.newImage("src/assets/UI Elements/HealthBar/HealthBarEmpty.png")
+    HealthBarFillTexture = love.graphics.newImage("src/assets/UIElements/HealthBar/HealthBar.png")
+    HealthBarEmptyTexture = love.graphics.newImage("src/assets/UIElements/HealthBar/HealthBarEmpty.png")
 
     HealthBarFillTexture:setFilter("nearest", "nearest")
     HealthBarEmptyTexture:setFilter("nearest", "nearest")
