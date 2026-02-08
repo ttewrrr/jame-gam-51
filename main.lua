@@ -51,19 +51,19 @@ local function drawExplosions()
     end
 end
 
-local function updateEnemies(dt, player)
+local function updateEnemies(dt, p)
     for i = #enemies, 1, -1 do
         local enemy = enemies[i]
-        enemy:update(dt, player)
+        enemy:update(dt, p)
         if enemy.dead then table.remove(enemies, i) end
     end
 end
 
 local function updateProjectiles(dt)
     for i = #projectiles, 1, -1 do
-        local p = projectiles[i]
-        p:update(dt)
-        if p.dead or p.y < 0 then table.remove(projectiles, i) end
+        local pr = projectiles[i]
+        pr:update(dt)
+        if pr.dead or pr.y < 0 then table.remove(projectiles, i) end
     end
 end
 
@@ -74,8 +74,8 @@ local function drawEnemies()
 end
 
 local function drawProjectiles()
-    for _, p in ipairs(projectiles) do
-        p:draw()
+    for _, pr in ipairs(projectiles) do
+        pr:draw()
     end
 end
 
@@ -128,7 +128,7 @@ local function checkTileCollision(entity)
     return false
 end
 
-local player = playerEntity.new(300, 100)
+player = playerEntity.new(300, 100)
 
 function love.load()
     Music = MusicManager.new()
@@ -166,6 +166,7 @@ end
 
 function love.draw()
     camera:attach()
+
     drawMap()
     drawExplosions()
     drawEnemies()
@@ -173,13 +174,15 @@ function love.draw()
     player.draw()
     Bubbles:Draw()
 
-    love.graphics.rectangle("line", player.collisions.x, player.collisions.y, player.collisions.w, player.collisions.h)
-
     camera:detach()
 end
 
 function love.update(dt)
     updateExplosions(dt)
+
+    player.collisions.x = player.x - player.collisions.w / 2
+    player.collisions.y = player.y - player.collisions.h / 2
+    local wasColliding = checkTileCollision(player.collisions)
 
     local oldX = player.x
     local oldY = player.y
@@ -188,8 +191,9 @@ function love.update(dt)
 
     player.collisions.x = player.x - player.collisions.w / 2
     player.collisions.y = player.y - player.collisions.h / 2
+    local isColliding = checkTileCollision(player.collisions)
 
-    if checkTileCollision(player.collisions) then
+    if isColliding and not wasColliding then
         player.x = oldX
         player.y = oldY
         player.collisions.x = player.x - player.collisions.w / 2

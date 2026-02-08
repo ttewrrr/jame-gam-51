@@ -39,7 +39,7 @@ function player.new(x, y)
     self.SonarFrameDelay = 0.1
     self.SonarFrameTimer = 0
 
-	self.HealthComponent = HealthComponent.new(self, 100, 2)
+	self.HealthComponent = HealthComponent.new(self, 300, 2)
     self.HealthComponent.IsPlayer = true
     self.HealthComponent.DrawHealthBar = true
     self.HealthComponent.HealthBarScale = 2

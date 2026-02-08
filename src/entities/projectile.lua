@@ -2,8 +2,8 @@ local projectile = {}
 
 local ProjectileConfigs = {
     [1] = {TexturePath = "src/assets/Player/bullet.png", Damage = 25, HitRadius = 6, InitialFireVelocity = 600, DeaccelerationRate = 900, UseGravity = true, GravityAcceleration = 900, GravityAlpha = 0.35, BubbleSpawnChanceBase = 0.2, BubbleTypeId = 1, DestroyOnHit = true, Color = {1, 1, 1}, BubbleRangeX = 1, BubbleRangeY = 1},
-    [5] = {TexturePath = "src/assets/Harpooner/HarpoonerHarpoon.png", Damage = 55, HitRadius = 7, InitialFireVelocity = 950, DeaccelerationRate = 220, UseGravity = true, GravityAcceleration = 900, GravityAlpha = 0.2, BubbleSpawnChanceBase = 0.1, BubbleTypeId = 1, DestroyOnHit = true, Color = {1, 1, 1}, BubbleRangeX = 4, BubbleRangeY = 4},
-    [10] = {TexturePath = "src/assets/Player/SonarBlast.png", Damage = 120, HitRadius = 26, InitialFireVelocity = 280, DeaccelerationRate = -420, UseGravity = false, GravityAcceleration = 0, GravityAlpha = 0, BubbleSpawnChanceBase = 0.25, BubbleTypeId = 1, DestroyOnHit = true, Color = {0.6, 0.9, 1}, BubbleRangeX = 10, BubbleRangeY = 10}
+    [5] = {TexturePath = "src/assets/Harpooner/HarpoonerHarpoon.png", Damage = 20, HitRadius = 7, InitialFireVelocity = 350, DeaccelerationRate = 220, UseGravity = true, GravityAcceleration = 900, GravityAlpha = 0.2, BubbleSpawnChanceBase = 0.1, BubbleTypeId = 1, DestroyOnHit = true, Color = {1, 1, 1}, BubbleRangeX = 4, BubbleRangeY = 4},
+    [10] = {TexturePath = "src/assets/Player/SonarBlast.png", Damage = 110, HitRadius = 26, InitialFireVelocity = 280, DeaccelerationRate = -420, UseGravity = false, GravityAcceleration = 0, GravityAlpha = 0, BubbleSpawnChanceBase = 0.25, BubbleTypeId = 1, DestroyOnHit = true, Color = {0.6, 0.9, 1}, BubbleRangeX = 10, BubbleRangeY = 10}
 }
 
 local TextureCache = {}

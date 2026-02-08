@@ -3,12 +3,14 @@
     "",
     "\\lib",
     "\\src",
+    "\\src\\assets",
     "\\src\\effects",
     "\\src\\entities",
     "\\src\\helper",
     "\\src\\maps",
+    "\\src\\sounds",
     "\\src\\sounds\\real"
   ],
-  "SelectedNode": "\\main.lua",
+  "SelectedNode": "\\src\\sounds\\real\\BigSubDeath.wav",
   "PreviewInSolutionExplorer": false
 }
