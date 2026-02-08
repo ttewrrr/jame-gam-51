@@ -3,8 +3,9 @@
     "",
     "\\lib",
     "\\src",
-    "\\src\\helper"
+    "\\src\\helper",
+    "\\src\\sounds\\real"
   ],
-  "SelectedNode": "\\main.lua",
+  "SelectedNode": "\\src\\helper\\UnderwaterLoop.lua",
   "PreviewInSolutionExplorer": false
 }

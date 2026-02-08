@@ -3,36 +3,28 @@
   "WorkspaceRootPath": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\effects\\BubbleSystem.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\effects\\BubbleSystem.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\main.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\HealthComponent.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\mechanics\\HealthComponent.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\UnderwaterLoop.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\helper\\UnderwaterLoop.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\lib\\camera.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:lib\\camera.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\musicmanager.lua||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\helper\\musicmanager.lua||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\player.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\entities\\player.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\projectile.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\entities\\projectile.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\Mine.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\entities\\Mine.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\MagneticMiner.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\entities\\MagneticMiner.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\enemyAI.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\mechanics\\enemyAI.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\enemy.lua||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\helper\\enemy.lua||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,110 +34,83 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BubbleSystem.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\effects\\BubbleSystem.lua",
-              "RelativeDocumentMoniker": "src\\effects\\BubbleSystem.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\effects\\BubbleSystem.lua",
-              "RelativeToolTip": "src\\effects\\BubbleSystem.lua",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAuwAsAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T19:09:15.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "enemy.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\enemy.lua",
-              "RelativeDocumentMoniker": "src\\helper\\enemy.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\enemy.lua",
-              "RelativeToolTip": "src\\helper\\enemy.lua",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T18:44:12.09Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "enemyAI.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\enemyAI.lua",
-              "RelativeDocumentMoniker": "src\\mechanics\\enemyAI.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\enemyAI.lua",
-              "RelativeToolTip": "src\\mechanics\\enemyAI.lua",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T18:44:06.984Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HealthComponent.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\HealthComponent.lua",
-              "RelativeDocumentMoniker": "src\\mechanics\\HealthComponent.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\mechanics\\HealthComponent.lua",
-              "RelativeToolTip": "src\\mechanics\\HealthComponent.lua",
-              "ViewState": "AgIAADQAAAAAAAAAAAAuwD4AAAAOAAAAAAAAAA==",
+              "Title": "UnderwaterLoop.lua",
+              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\UnderwaterLoop.lua",
+              "RelativeDocumentMoniker": "src\\helper\\UnderwaterLoop.lua",
+              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\UnderwaterLoop.lua",
+              "RelativeToolTip": "src\\helper\\UnderwaterLoop.lua",
+              "ViewState": "AgIAACYAAAAAAAAAAAAuwE4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T18:40:01.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MagneticMiner.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\MagneticMiner.lua",
-              "RelativeDocumentMoniker": "src\\entities\\MagneticMiner.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\MagneticMiner.lua",
-              "RelativeToolTip": "src\\entities\\MagneticMiner.lua",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T17:58:42.614Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Mine.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\Mine.lua",
-              "RelativeDocumentMoniker": "src\\entities\\Mine.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\Mine.lua",
-              "RelativeToolTip": "src\\entities\\Mine.lua",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T17:58:37.867Z",
+              "WhenOpened": "2026-02-08T22:01:01.592Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "projectile.lua",
-              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\projectile.lua",
-              "RelativeDocumentMoniker": "src\\entities\\projectile.lua",
-              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\projectile.lua",
-              "RelativeToolTip": "src\\entities\\projectile.lua",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAACQAAAASAAAAAAAAAA==",
+              "Title": "musicmanager.lua",
+              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\musicmanager.lua",
+              "RelativeDocumentMoniker": "src\\helper\\musicmanager.lua",
+              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\helper\\musicmanager.lua",
+              "RelativeToolTip": "src\\helper\\musicmanager.lua",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T17:54:26.383Z",
+              "WhenOpened": "2026-02-08T21:55:09.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Mine.lua",
+              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\Mine.lua",
+              "RelativeDocumentMoniker": "src\\entities\\Mine.lua",
+              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\Mine.lua",
+              "RelativeToolTip": "src\\entities\\Mine.lua",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-08T21:36:28.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.lua",
+              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\main.lua",
+              "RelativeDocumentMoniker": "main.lua",
+              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\main.lua",
+              "RelativeToolTip": "main.lua",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAH0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-08T21:17:42.815Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "camera.lua",
+              "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\lib\\camera.lua",
+              "RelativeDocumentMoniker": "lib\\camera.lua",
+              "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\lib\\camera.lua",
+              "RelativeToolTip": "lib\\camera.lua",
+              "ViewState": "AgIAACkAAAAAAAAAAAAuwFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-08T21:09:20.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "player.lua",
               "DocumentMoniker": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\player.lua",
               "RelativeDocumentMoniker": "src\\entities\\player.lua",
               "ToolTip": "C:\\Backup\\2_Assets\\Frogman\\FrogmanGame\\src\\entities\\player.lua",
               "RelativeToolTip": "src\\entities\\player.lua",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAuwEMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAowJsAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-08T17:54:14.791Z",
+              "WhenOpened": "2026-02-08T21:09:08.844Z",
               "EditorCaption": ""
             }
           ]

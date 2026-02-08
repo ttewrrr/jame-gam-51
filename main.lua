@@ -1,5 +1,9 @@
 local collisions = require("src.helper.collisions")
 local map = require("src.mechanics.map")
+local MusicManager = require("src.helper.MusicManager")
+local UnderwaterLoop = require("src.helper.UnderwaterLoop")
+
+
 
 tileSize = map.tileSize
 tiles = map.tiles
@@ -104,6 +108,8 @@ function checkTileCollision(entity)
 end
 
 function love.load()
+    Music = MusicManager.new()
+    Music:Play()
     camera = require("lib.camera")
     camera.scale = 4
     local icon = love.image.newImageData("src/assets/gameicon/icon.png")
@@ -117,6 +123,9 @@ function love.load()
     love.mouse.setCursor(customCursor)
 
     player.load()
+
+    Underwater = UnderwaterLoop.new()
+    Underwater:Play()
 
     camera:setBounds(map.tiles, map.tileSize)
 end
@@ -161,6 +170,8 @@ function love.update(dt)
     player.collisions.x = player.x - player.collisions.w / 2
     player.collisions.y = player.y - player.collisions.h / 2
     local isColliding = checkTileCollision(player.collisions)
+
+    Underwater:Update(dt, player)
 
     if isColliding and not wasColliding then
         player.x = oldX
