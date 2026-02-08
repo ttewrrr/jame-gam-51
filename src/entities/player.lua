@@ -1,4 +1,5 @@
 local projectile = require("src.entities.projectile")
+local HealthComponent = require("src.mechanics.HealthComponent")
 
 local player = {}
 
@@ -8,8 +9,7 @@ shootSound = love.audio.newSource("src/sounds/real/PlayerFireGun.wav", "static")
 
 function player.new(x, y)
     local self = setmetatable({}, player)
-
-    self.Health = 100
+	
     self.x = x or 0
     self.y = y or 0
     self.rot = 0
@@ -17,12 +17,19 @@ function player.new(x, y)
     self.idle = true
 
     self.sprite = 1
-
+	
     self.floatTime = 0
     self.floatOffset = 0
     self.shootTimer = 0
     self.shootCooldown = 0.4
-
+	
+	self.HealthComponent = HealthComponent.new(self, 100, 2) --max hp, damage par, 2 is blood 3 is sparks for mines or other stuff	
+    self.HealthComponent.IsPlayer = true
+    self.HealthComponent.DrawHealthBar = true
+    self.HealthComponent.HealthBarScale = 2
+	
+		--To Apply Damage to stuff from enemy projectile
+	--player.HealthComponent:EventAnyDamage(25,projectile self,projectile.x,projectile.y)
 
     function self.shoot()
         table.insert(projectiles, projectile.new(self.x, self.y, self.rot, -400))
@@ -30,7 +37,7 @@ function player.new(x, y)
         self.sprite = 1
         local s = shootSound:clone()
         s:play()
-		Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 5)
+		Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 5, 1)
     end
 
     function self.load()
@@ -43,11 +50,26 @@ function player.new(x, y)
     end
 
     function self.draw()
-        --love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
+        
+        if self.HealthComponent.dead then
+	    return
+	    end
+        self.HealthComponent:Draw()
+        love.graphics.print("Player x: ".. self.x .. " Player y: " .. self.y, 100, 100)
         love.graphics.draw(playerSprite, playerSprites[self.sprite], self.x, self.y + self.floatOffset, self.rot, 1, 1, 32, 32)
     end
 
     function self.update(dt)
+	
+		if self.HealthComponent.dead then
+		return
+		end
+
+	
+		if love.keyboard.isDown("o") then
+		self.HealthComponent:EventAnyDamage(1, nil, self.x, self.y)
+		end
+	
         if love.keyboard.isDown("right") then
             self.x = self.x + 100 * dt
             self.direction = 1
@@ -89,7 +111,7 @@ function player.new(x, y)
             self.rot = angleToMouse
 			
 			if love.math.random() < 0.1 then
-				Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 1)
+				Bubbles:SpawnBubbles(self.x, self.y, 6, 6, 1, 1)
 			end
 			
         end

@@ -45,9 +45,10 @@ function updateProjectiles(dt)
     for i = #projectiles, 1, -1 do
         local projectile = projectiles[i]
         projectile:update(dt)
-        if projectile.y < 0 then
-            table.remove(projectiles, i)
-        end
+        if projectile.dead or projectile.y < 0 then
+		table.remove(projectiles, i)
+end
+		
     end
 end
 
