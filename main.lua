@@ -14,71 +14,29 @@ explosions = explosions or {}
 enemies = enemies or {}
 projectiles = projectiles or {}
 
+-- =========================
+-- SPAWN TUNING
+-- =========================
 local SpawnTimer = 0
 local SpawnIntervalMin = 1.2
 local SpawnIntervalMax = 2.4
 local SpawnDistanceMin = 180
 local SpawnDistanceMax = 260
 
+-- Mines (separate timer + distance)
+local MineSpawnTimer = 0
+local MineSpawnIntervalMin = 3.5
+local MineSpawnIntervalMax = 6.5
+local MineSpawnDistanceMin = 140
+local MineSpawnDistanceMax = 240
+
 local function RandRange(a, b)
     return a + love.math.random() * (b - a)
 end
 
-local function SpawnHarpoonerNearPlayer(p)
-    if not p then return end
-    if not enemies then return end
-
-    local angle = love.math.random() * math.pi * 2
-    local dist = RandRange(SpawnDistanceMin, SpawnDistanceMax)
-
-    local x = p.x + math.cos(angle) * dist
-    local y = p.y + math.sin(angle) * dist
-
-    table.insert(enemies, Harpooner.new(x, y))
-end
-
-local function updateExplosions(dt)
-    for i = #explosions, 1, -1 do
-        local e = explosions[i]
-        e:update(dt)
-        if e.dead then table.remove(explosions, i) end
-    end
-end
-
-local function drawExplosions()
-    for i = 1, #explosions do
-        explosions[i]:draw()
-    end
-end
-
-local function updateEnemies(dt, p)
-    for i = #enemies, 1, -1 do
-        local enemy = enemies[i]
-        enemy:update(dt, p)
-        if enemy.dead then table.remove(enemies, i) end
-    end
-end
-
-local function updateProjectiles(dt)
-    for i = #projectiles, 1, -1 do
-        local pr = projectiles[i]
-        pr:update(dt)
-        if pr.dead or pr.y < 0 then table.remove(projectiles, i) end
-    end
-end
-
-local function drawEnemies()
-    for _, enemy in ipairs(enemies) do
-        enemy:draw()
-    end
-end
-
-local function drawProjectiles()
-    for _, pr in ipairs(projectiles) do
-        pr:draw()
-    end
-end
-
+-- =========================
+-- MAP DRAW / COLLISION
+-- =========================
 tileSize = map.tileSize
 tiles = map.tiles
 
@@ -128,6 +86,100 @@ local function checkTileCollision(entity)
     return false
 end
 
+-- =========================
+-- SPAWN HELPERS (NEW)
+-- =========================
+local function FindSpawnPosNearPlayer(p, distMin, distMax, tries, testW, testH)
+    if not p then return nil end
+    tries = tries or 12
+    testW = testW or 32
+    testH = testH or 32
+
+    local lastX, lastY = p.x, p.y
+
+    for _ = 1, tries do
+        local angle = love.math.random() * math.pi * 2
+        local dist = RandRange(distMin, distMax)
+
+        local x = p.x + math.cos(angle) * dist
+        local y = p.y + math.sin(angle) * dist
+
+        lastX, lastY = x, y
+
+        -- test rect to avoid spawning inside solid tiles
+        local testRect = { x = x - testW / 2, y = y - testH / 2, w = testW, h = testH }
+        if not checkTileCollision(testRect) then
+            return x, y
+        end
+    end
+
+    -- fallback: if all tries fail, spawn at last computed position
+    return lastX, lastY
+end
+
+local function SpawnHarpoonerNearPlayer(p)
+    if not p or not enemies then return end
+
+    local x, y = FindSpawnPosNearPlayer(p, SpawnDistanceMin, SpawnDistanceMax, 12, 32, 32)
+    table.insert(enemies, Harpooner.new(x, y))
+end
+
+local function SpawnMineNearPlayer(p)
+    if not p or not enemies then return end
+
+    -- If your mine is bigger/smaller, change 32,32 to match.
+    local x, y = FindSpawnPosNearPlayer(p, MineSpawnDistanceMin, MineSpawnDistanceMax, 12, 32, 32)
+    table.insert(enemies, Mine.new(x, y))
+end
+
+-- =========================
+-- UPDATE/DRAW HELPERS
+-- =========================
+local function updateExplosions(dt)
+    for i = #explosions, 1, -1 do
+        local e = explosions[i]
+        e:update(dt)
+        if e.dead then table.remove(explosions, i) end
+    end
+end
+
+local function drawExplosions()
+    for i = 1, #explosions do
+        explosions[i]:draw()
+    end
+end
+
+local function updateEnemies(dt, p)
+    for i = #enemies, 1, -1 do
+        local enemy = enemies[i]
+        enemy:update(dt, p)
+        if enemy.dead then table.remove(enemies, i) end
+    end
+end
+
+local function updateProjectiles(dt)
+    for i = #projectiles, 1, -1 do
+        local pr = projectiles[i]
+        pr:update(dt)
+        if pr.dead or pr.y < 0 then table.remove(projectiles, i) end
+    end
+end
+
+local function drawEnemies()
+    for _, enemy in ipairs(enemies) do
+        enemy:draw()
+    end
+end
+
+local function drawProjectiles()
+    for _, pr in ipairs(projectiles) do
+        pr:draw()
+    end
+end
+
+-- =========================
+-- PLAYER
+-- =========================
 player = playerEntity.new(300, 100)
 
 function love.load()
@@ -158,10 +210,13 @@ function love.load()
     projectiles = {}
     explosions = {}
 
+    -- initial enemies
     table.insert(enemies, Mine.new(300, 50))
     table.insert(enemies, Harpooner.new(500, 50))
 
+    -- init timers
     SpawnTimer = RandRange(SpawnIntervalMin, SpawnIntervalMax)
+    MineSpawnTimer = RandRange(MineSpawnIntervalMin, MineSpawnIntervalMax)
 end
 
 function love.draw()
@@ -180,6 +235,7 @@ end
 function love.update(dt)
     updateExplosions(dt)
 
+    -- pre-move collision snapshot
     player.collisions.x = player.x - player.collisions.w / 2
     player.collisions.y = player.y - player.collisions.h / 2
     local wasColliding = checkTileCollision(player.collisions)
@@ -189,6 +245,7 @@ function love.update(dt)
 
     player.update(dt)
 
+    -- post-move collision
     player.collisions.x = player.x - player.collisions.w / 2
     player.collisions.y = player.y - player.collisions.h / 2
     local isColliding = checkTileCollision(player.collisions)
@@ -208,11 +265,22 @@ function love.update(dt)
 
     Underwater:Update(dt, player)
 
+    -- =========================
+    -- SPAWNING (Harpooners + Mines)
+    -- =========================
     if player and player.HealthComponent and not player.HealthComponent.dead then
+        -- Harpooners
         SpawnTimer = SpawnTimer - dt
         if SpawnTimer <= 0 then
             SpawnHarpoonerNearPlayer(player)
             SpawnTimer = RandRange(SpawnIntervalMin, SpawnIntervalMax)
+        end
+
+        -- Mines
+        MineSpawnTimer = MineSpawnTimer - dt
+        if MineSpawnTimer <= 0 then
+            SpawnMineNearPlayer(player)
+            MineSpawnTimer = RandRange(MineSpawnIntervalMin, MineSpawnIntervalMax)
         end
     end
 end
